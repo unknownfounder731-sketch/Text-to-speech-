@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceForge Pro - Modern Text to Speech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="background-animation">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1v22M8 6l4-4 4 4M8 18l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>VoiceForge Pro</h1>
+                    <p class="tagline">Advanced AI Text-to-Speech Generator</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Text Input Section -->
+            <section class="glass-card text-input-section">
+                <div class="section-header">
+                    <h2>Enter Your Text</h2>
+                    <div class="character-count">
+                        <span id="charCount">0</span>
+                        <span class="char-limit">/ 50,000</span>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <textarea 
+                        id="textInput" 
+                        class="text-input" 
+                        placeholder="Type or paste your text here to convert to natural speech... (Up to 50,000 characters supported)"
+                        maxlength="50000"
+                        rows="6"
+                    ></textarea>
+                </div>
+            </section>
+
+            <!-- Voice Settings -->
+            <section class="glass-card voice-settings-section">
+                <h2>Voice Configuration</h2>
+                <div class="settings-grid">
+                    <div class="form-group">
+                        <label for="languageSelect" class="form-label">
+                            <span class="label-icon">🌍</span>
+                            Language
+                        </label>
+                        <select id="languageSelect" class="form-control modern-select">
+                            <option value="">Loading languages...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="voiceSelect" class="form-label">
+                            <span class="label-icon">🎤</span>
+                            Voice
+                        </label>
+                        <select id="voiceSelect" class="form-control modern-select">
+                            <option value="">Select language first</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="voice-controls">
+                    <div class="control-row">
+                        <label for="pitchSlider" class="control-label">
+                            Pitch
+                            <span class="control-value" id="pitchValue">1.0</span>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" id="pitchSlider" min="0.5" max="2" value="1" step="0.1" class="modern-slider">
+                            <div class="slider-track"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-row">
+                        <label for="speedSlider" class="control-label">
+                            Speed
+                            <span class="control-value" id="speedValue">1.0x</span>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" id="speedSlider" min="0.5" max="2" value="1" step="0.1" class="modern-slider">
+                            <div class="slider-track"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="previewBtn" class="btn btn-secondary">
+                        <span class="btn-icon">▶</span>
+                        Preview
+                    </button>
+                    <button id="generateBtn" class="btn btn-primary">
+                        <span class="btn-icon">✨</span>
+                        Generate Audio
+                    </button>
+                </div>
+            </section>
+
+            <!-- Audio Player Section -->
+            <section class="glass-card audio-player-section" id="audioPlayerSection" style="display: none;">
+                <h2>Audio Player</h2>
+                <div class="audio-visualizer">
+                    <canvas id="visualizerCanvas" width="400" height="100"></canvas>
+                    <div class="audio-controls">
+                        <button id="playBtn" class="control-btn play-btn">
+                            <span>▶</span>
+                        </button>
+                        <button id="pauseBtn" class="control-btn pause-btn" style="display: none;">
+                            <span>⏸</span>
+                        </button>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span class="time-separator">/</span>
+                            <span id="totalTime">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="download-section">
+                    <div class="filename-input">
+                        <label for="filenameInput" class="form-label">Filename</label>
+                        <input type="text" id="filenameInput" class="form-control" placeholder="my-voice-audio" value="voice-output">
+                    </div>
+                    <button id="downloadBtn" class="btn btn-download">
+                        <span class="btn-icon">⬇</span>
+                        Download MP3
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Status Toast -->
+    <div id="statusToast" class="status-toast hidden">
+        <div class="toast-content">
+            <span class="toast-icon"></span>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Processing audio...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
